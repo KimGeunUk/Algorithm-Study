@@ -1,3 +1,2 @@
-print(counta)
-    # print(countb)
-    # print(countc)
+print(solution(13, 17))
+# print(solution(24, 27))
