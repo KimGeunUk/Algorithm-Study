@@ -1,10 +1,6 @@
-sum = 0
-    # for idx, i in enumerate(numbers):
-    #     if sum != target:
-    #         if i <= target:
-    #             sum += i
-    #         elif i > target:
-    #             sum -= i
-    #         answer += 1
-    #     else:
-    #         union = len(set(numbers[idx:]))
+print(solution([1, 1, 1, 1, 1], 1)) # 5 -1-1+1+1+1 / -1+1-1+1+1 / -1+1+1-1+1 / -1+1+1+1-1 / +1-1-1+1+1 / +1-1+1-1+1 / +1-1+1+1-1 / +1+1-1-1+1 / +1+1-1+1-1 / +1+1+1-1-1
+# print(solution([1, 1, 1, 1, 1], 3)) # 5
+# print(solution([4, 1, 2, 1], 4))    # 2
+# print(solution([1, 2, 1, 2], 2))    # 3
+# print(solution([1, 2, 1, 2], 6))    # 1
+# print(solution([1, 2, 3, 4], 2))    # 2
