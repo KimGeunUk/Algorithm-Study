@@ -1,2 +1,2 @@
 
-                count_order[value] += [key]
+        for i in str2_list:
