@@ -7,56 +7,60 @@ def solution(str1, str2):
     answer = 0
     
     str1 = str1.lower()
-    str2 = str2.lower()
-    
-    str1 = [i for i in str1 if i.isalpha()==True]
-    str2 = [i for i in str2 if i.isalpha()==True]   
+    str2 = str2.lower() 
     
     str1_list = []
     str2_list = []
-    str1_dic = {}
-    str2_dic = {}
     
     for idx, s1 in enumerate(str1):        
-        if s1.isalpha() == True and idx < len(str1)-1:
-            str1_list.append(str1[idx])
-            str1_list[idx] += str1[idx+1]
+        if idx < len(str1)-1:
+            if str1[idx].isalpha()==False or str1[idx+1].isalpha()==False:
+                pass
+            else:
+                str1_list.append(str1[idx])
+                str1_list[-1] += str1[idx+1]
             
     for idx, s2 in enumerate(str2):        
-        if s2.isalpha() == True and idx < len(str2)-1:    
-            str2_list.append(str2[idx])
-            str2_list[idx] += str2[idx+1]
-    
-    print(str1_list)
-    print(str2_list)
-    
+        if idx < len(str2)-1:
+            if str2[idx].isalpha()==False or str2[idx+1].isalpha()==False:
+                pass
+            else:
+                str2_list.append(str2[idx])
+                str2_list[-1] += str2[idx+1]
+                
+    if str1_list == [] and str2_list == []:
+            return 65536
+                
     union_list = []
     inter_list = []
     
-    if len(str1_list) > len(str2_list):
-        for i in str2_list:
-            if i in str1_list:
-                inter_list.append(i)
+    for i in str1_list:
+        if i in str2_list:
+            if i in inter_list:
+                pass
             else:
-                union_list.append(i)
-        union_list += str1_list        
-    else:
-        for i in str1_list:
-            if i in str2_list:
                 count1 = str1_list.count(i)
                 count2 = str2_list.count(i)
-                print(count1, count2)
-                inter_list.append(i)
-            else:
+                
+                for j in range(min(count1, count2)):                 
+                    inter_list.append(i)
+                for j in range(max(count1, count2)):              
+                    union_list.append(i)
+        else:
+            union_list.append(i)
+            
+    for i in str2_list:
+        if i not in union_list:
+            count = str2_list.count(i)
+            for j in range(count):
                 union_list.append(i)
-        union_list += str2_list
-    
-    print(inter_list)
-    print(union_list)
+                        
+    answer = int((len(inter_list) / len(union_list))*65536)
     
     return answer
 
 #print(solution('FRANCE', 'french'))
-print(solution('handshake', 'shake hands'))
+#print(solution('handshake', 'shake hands'))
 #print(solution('aa1+aa2', 'AAAA12'))
 #print(solution('E=M*C^2', 'e=m*c^2'))
+print(solution(' abc', 'abbb'))

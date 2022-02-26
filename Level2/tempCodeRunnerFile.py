@@ -1,2 +1,2 @@
 
-        for i in str2_list:
+        for i in str1_list:
