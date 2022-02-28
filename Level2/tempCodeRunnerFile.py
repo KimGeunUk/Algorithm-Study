@@ -1,2 +1,1 @@
-
-        for i in str1_list:
+n(p_iter))
