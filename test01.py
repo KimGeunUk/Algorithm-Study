@@ -1,5 +1,10 @@
-a= [[1,1], [2, 2]]
+a = ['ss', 2, 3]
 
-b = abs(4 - 2)
-if [a[1][1], b] in a:
-    print('dd')
+a = dict()
+
+a['a'] = 0
+a['b'] = 2
+
+print(a)
+
+print(a['a'])

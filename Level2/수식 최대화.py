@@ -54,39 +54,6 @@ def solution(expression):
             idx += 1 
                        
         result.append(abs(int(exp[0])))
-            
-        
-        # for j, idx in enumerate(i):       # [0, 2, 1, 3]
-        #     cal = expression_split[idx - count] + oper_v[idx] + expression_split[idx - count + 1]
-        #     value = eval(cal)
-        #     expression_split.pop(idx - count)
-        #     expression_split[idx - count] = str(value)
-
-        #     if j > 0:
-        #         if pre_idx < idx:
-        #             pass
-        #         else:            
-        #             count += 1
-        #     else:
-        #         count += 1
-                
-        #     pre_idx = idx
-        #     print(value)
-        #     print(expression_split)
-            
-    # for i in operator_list:
-    #     for j in i:     # ('-', '*', '+')
-    #         count = 0
-    #         for k in order_list:
-    #             idx = oper[j][k]
-    #             cal = str(expression_split[idx])+j+str(expression_split[idx+1])
-    #             value = eval(cal)
-                
-    #             exp.pop(oper[j][k] - count)
-    #             exp[oper[j][k] - count] = str(value)
-    #             count -= 1
-    #             print(value)
-    #             print(exp)
 
     return max(result)
 

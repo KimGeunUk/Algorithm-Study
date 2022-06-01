@@ -5,9 +5,6 @@ def solution(s):
     
     s_split = list()    
     s_dict = dict()
-    
-    print(re.split(r'{*}', s))
-    
 
     for i in re.split(r'{*}', s):
         tmp = []     
@@ -18,19 +15,7 @@ def solution(s):
         
         if tmp != []:        
             s_split.append(tmp)
-            
-    # for i in re.split(r'{*}', s):
-    #     tmp = ''
-    #     if i == '':
-    #         continue
-    #     else:
-    #         for j in i:
-    #             if j.isdigit():
-    #                 tmp += j
-    #     s_split.append(tmp)
-    
-    # print(s_split)
-    
+
     for i in s_split:
         for j in i:
             if j in s_dict:
