@@ -144,8 +144,6 @@ def solution(name):
             col_move = 0
             for c in map(ord, n):
                 col_move += min(c - 65, 91 - c)
-                print(col_move)
-
             answer = min(answer, row_move + col_move)
 
     return answer
