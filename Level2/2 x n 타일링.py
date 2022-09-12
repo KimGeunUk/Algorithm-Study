@@ -24,11 +24,12 @@ def solution(n):
         
     return int(answer) % 1000000007
 
+# 피보나치 수열!
 def fib(n):    
     _curr, _next = 0, 1
     for _ in range(n+1):
         _curr, _next = _next, _curr + _next
-    return _curr
+    return _curr % 1000000007
 
 print(fib(3))
 
