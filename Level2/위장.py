@@ -33,12 +33,19 @@ def solution(clothes):
             cloth_dic[cloth[1]] = [cloth[0]]
 
     v_list = list()
+    v_len = list()
     
     for v in cloth_dic.values():
         answer += len(v)
-        v_list.append(v)   
-    
+        v_list.append(v)
+        v_len.append(len(v))
+
     if len(cloth_dic.keys()) == 1:
+        return answer
+    if max(v_len) == 1:
+        answer = 0
+        for i in range(len(v_len)):
+            answer += pow(2,i)
         return answer
     
     for i in range(2, len(v_list)+1):
@@ -48,7 +55,33 @@ def solution(clothes):
 
     return answer
 
-print(solution([["yellow_hat", "headgear"], ["blue_sunglasses", "eyewear"], ["green_turban", "headgear"], ["aa", "bb"]])) # 5
+def solution1(clothes):
+    from collections import Counter
+    from functools import reduce
+    cnt = Counter([kind for name, kind in clothes])
+    answer = reduce(lambda x, y: x*(y+1), cnt.values(), 1) - 1
+    return answer
+
+def solution2(clothes):
+    clothes_type = {}
+
+    for c, t in clothes:
+        if t not in clothes_type:
+            clothes_type[t] = 2
+        else:
+            clothes_type[t] += 1
+
+    cnt = 1
+    for num in clothes_type.values():
+        cnt *= num
+
+    return cnt - 1
+
+# 다음 원리를 사용하면 쉽게 풀 수 있다.
+# (a + 1)(b + 1)(c + 1) - 1 = (a + b + c) + (ab + bc + ca) + abc 
+
+print(solution1([["yellow_hat", "headgear"], ["blue_sunglasses", "eyewear"], ["green_turban", "headgear"], ["aa", "bb"]])) # 5
 print(solution([["crow_mask", "face"], ["blue_sunglasses", "face"], ["smoky_makeup", "face"]])) # 3
-# print(solution([[1, 'a'], [2, 'b'], [3, 'c']]))
-# print(solution([[1, 'a'], [4, 'a'], [2, 'b'], [3, 'c']])) # 4 + 7
+print(solution1([[1, 'a'], [2, 'b']]))
+print(solution([[1, 'a'], [2, 'b'], [3, 'c']]))
+#print(solution([[1, 'a'], [4, 'a'], [2, 'b'], [5, 'b'], [3, 'c'], [6, 'c']])) # 4 + 7
