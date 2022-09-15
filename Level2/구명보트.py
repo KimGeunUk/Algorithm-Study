@@ -18,6 +18,7 @@
     구명보트의 무게 제한은 항상 사람들의 몸무게 중 최댓값보다 크게 주어지므로 사람들을 구출할 수 없는 경우는 없습니다.
 """
 
+## 시간 초과
 # def solution(people, limit):
 #     people = sorted(people, reverse=True)
     
@@ -66,7 +67,7 @@ def solution(people, limit):
         if len(people) == 0:
             break
         
-    return answer
+    return len(answer)
 
 print(solution([70, 50, 80, 50], 100)) # 3
 print(solution([70, 80, 50], 100)) # 3
