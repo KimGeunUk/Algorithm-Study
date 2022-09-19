@@ -10,17 +10,29 @@ n개의 숫자를 담은 배열 arr이 입력되었을 때 이 수들의 최소�
     arr의 원소는 100 이하인 자연수입니다.
 """
 def GCD(x, y):
-    while y:
+    while y>0:
         x, y = y, x%y
     return x
 
+# OR
+# def gcd(a, b):
+#     if b == 0:
+#         return a
+#     return gcd(b, a%b)
+
 def LCM(x, y):
-    return (x+y)//GCD(x, y)
+    return (x*y)//GCD(x, y)
 
 def solution(arr):
-    answer = 0
-    print(LCM(2, 7))
-    return answer
+    if len(arr) == 0:
+        return arr[0]
+    
+    L = arr[0]
+
+    for i in arr[1:]:
+        L = LCM(L, i)
+
+    return L
 
 print(solution([2,6,8,14])) # 168
 print(solution([1,2,3])) # 6
