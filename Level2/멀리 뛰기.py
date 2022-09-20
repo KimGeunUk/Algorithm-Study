@@ -17,7 +17,6 @@
     n은 1 이상, 2000 이하인 정수입니다.
 """
 
-import itertools
 from collections import Counter
 from math import factorial
 def solution(n):
@@ -39,14 +38,21 @@ def solution(n):
         c+=1        
         L.append(l)
     
+    # / 보단 // 사용을 하자
     for i in L:
        C = Counter(i)
-       s = factorial(C[1] + C[2]) / (factorial(C[1])*factorial(C[2]))
-       print(int(s))
+       s = factorial(C[1] + C[2]) // (factorial(C[1])*factorial(C[2]))
        answer += int(s)
         
     return answer % 1234567
 
-print(solution(1115))
-print(solution(4))
-print(solution(3))
+# 다른 사람 풀이 - 피보나치..!
+def solution1(n):
+    a, b = 1, 2
+    for i in range(2, n):
+        a, b = b, a + b
+    return b
+
+print(solution1(2000))
+print(solution1(4))
+print(solution1(3))
