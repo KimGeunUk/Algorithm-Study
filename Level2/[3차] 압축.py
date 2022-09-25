@@ -58,7 +58,7 @@ OT		34
 출력 형식
 주어진 문자열을 압축한 후의 사전 색인 번호를 배열로 출력하라.
 """
-from collections import deque
+# 너무 난잡하다
 def solution(msg):
     answer = []
     
@@ -98,6 +98,26 @@ def solution(msg):
         i += 1
   
     return answer
+
+# 다른 사람 풀이
+def solution(msg):
+    alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    d = {k:v for (k,v) in zip(alphabet, list(range(1,27)))}
+    answer = []
+
+    while True:
+        if msg in d:
+            answer.append(d[msg])
+            break
+        for i in range(1, len(msg)+1):
+            if msg[0:i] not in d:
+                answer.append(d[msg[0:i-1]])
+                d[msg[0:i]] = len(d)+1
+                msg = msg[i-1:]
+                break
+
+    return answer
+
 
 print(solution("KAKAO"))
 print(solution("TOBEORNOTTOBEORTOBEORNOT"))
