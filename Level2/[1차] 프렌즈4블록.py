@@ -43,16 +43,13 @@ def solution(m, n, board):
         answer += len(rm)
         
         for i in rm:
-            print(i)
             if i[0] > 0: 
                 for j in range(i[0], 0, -1):
                     board[j][i[1]] = board[j-1][i[1]]
                     board[j-1][i[1]] = ''
             else:
                 board[i[0]][i[1]] = ''
-                
-        for i in board:
-            print(i)
+
     return answer
 
 #print(solution(4, 5, ["AAADE", "AAABF", "CCBBF", "CCBDE"]))
