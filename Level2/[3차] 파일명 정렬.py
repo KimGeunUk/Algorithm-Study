@@ -41,20 +41,29 @@ files는 1000 개 이하의 파일명을 포함하는 문자열 배열이다.
 """
 
 def solution(files):
-    answer = []
+    a, answer = [], []
     
-    for i in files:
-        print(i.upper())
-    
-    ##
-    ###
-    
-    ##
-    
-    ##
-    
+    for file in files:
+        s = []
+        for idx, i in enumerate(file):    
+            if i.isdigit():
+                s.append(idx)
+            elif len(s) > 0 and i.isdigit()==False:
+                break
+            
+        head = file[:s[0]]
+        number = file[s[0]:s[-1]+1]
+        
+        etc = file[s[-1]+1:]
+        
+        a.append([head, number, etc])
+
+    a = sorted(a, key=lambda x: (x[0].lower(), int(x[1])))
+    for i in a:
+        answer.append(''.join(i))
     
     return answer
 
-print(solution(["img12.png", "img10.png", "img02.png", "img1.png", "IMG01.GIF", "img2.JPG"]))
-print(solution(["F-5 Freedom Fighter", "B-50 Superfortress", "A-10 Thunderbolt II", "F-14 Tomcat"]))
+#print(solution(["img12.png", "img10.png", "img02.png", "img1.png", "IMG01.GIF", "img2.JPG"]))
+#print(solution(["F-5 Freedom Fighter", "B-50 Superfortress", "A-10 Thunderbolt II", "F-14 Tomcat"]))
+print(solution(["MUZI012.txt", "muzi9.txt", "muzi0011.TXT", "muzi13.txt", "MUZI10.txt", "MUZI014.txt"]))
