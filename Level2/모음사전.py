@@ -13,12 +13,43 @@ word는 알파벳 대문자 'A', 'E', 'I', 'O', 'U'로만 이루어져 있습니
 def solution(word):
     answer = 0
     
+    # 5 25 125 625 3125
+    words = ['A', 'E', 'I', 'O', 'U']
     
+    for idx, w in enumerate(word):
+        if idx == 0:
+            answer += 780 * words.index(w)
+            answer += words.index(w) + 1
+        elif idx == 1:
+            answer += 155 * words.index(w)
+            answer += words.index(w) + 1
+        elif idx == 2:
+            answer += 30 * words.index(w)
+            answer += words.index(w) + 1
+        elif idx == 3:
+            answer += 5 * words.index(w)
+            answer += words.index(w) + 1
+        elif idx == 4:
+            answer += words.index(w) + 1
     
     return answer
 
-print(solution("AAAAE")) # 6
+# 다른 사람 풀이
+from itertools import product
+
+def solution1(word):
+    a = []
+    for i in range(5):
+        for c in product("AEIOU", repeat=i+1):
+            print(c)
+            a.append("".join(c))
+
+    return lambda word: sorted(a).index(word) + 1
+
+
+print(solution1("AAAAE")) # 6
 print(solution("AAAE")) # 10
+print(solution("AAE")) # 
 print(solution("I")) # 1563
 print(solution("EIO")) # 1189
 
