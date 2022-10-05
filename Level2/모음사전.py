@@ -41,7 +41,6 @@ def solution1(word):
     a = []
     for i in range(5):
         for c in product("AEIOU", repeat=i+1):
-            print(c)
             a.append("".join(c))
 
     return lambda word: sorted(a).index(word) + 1

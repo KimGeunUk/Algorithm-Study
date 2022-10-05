@@ -26,12 +26,13 @@ f(7) = 11 입니다. 다음 표와 같이 7보다 큰 수들 중에서 비트가
 
 def solution(numbers):
     answer = []
-    for no in numbers:
-        if no % 2 == 0:
-            answer.append(no+1)
+    for n in numbers:
+        if n % 2 == 0:
+            answer.append(n+1)
             continue
-        last_zero = (no+1) & ~no
-        result = (no|last_zero) & ~(last_zero >> 1)
+        
+        last_zero = (n+1) & ~n
+        result = (n|last_zero) & ~(last_zero >> 1)
         answer.append(int(result))
     return answer
 
