@@ -31,7 +31,7 @@ def solution(n, k):
         
         now = k // nums
         k = k % nums
-        print(now, k)
+        
         if k == 0:
             answer.append(num[now-1])
             num.remove(num[now-1]) 
