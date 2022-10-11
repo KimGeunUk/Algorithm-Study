@@ -25,44 +25,21 @@
 표(board)의 값은 1또는 0으로만 이루어져 있습니다.
 """
 
-from collections import deque
 def solution(board):
-    answer = []
+    answer = 0
 
-    dx = [1, 0, 1]
-    dy = [0, 1, 1]
+    for r in range(1, len(board)):
+        for c in range(1, len(board[0])):
+            if board[r][c] == 0: continue            
+            board[r][c] = min(board[r-1][c], board[r][c-1], board[r-1][c-1]) + 1
     
-    def bfs(x, y):
-        queue = deque()
-        queue.append((x, y))
-                        
-        count = 0
-        while queue:
-            x, y = queue.popleft()
-            
-            if board[x][y] == 1:
-                
-                for i in range(3):                    
-                    nx = x + dx[i]
-                    ny = y + dy[i]
-                    
-                    if nx >= len(board) or ny >= len(board[0]): continue
-                    
-                    if board[nx][ny] == 0: break
-                    
-                    if board[nx][ny] == 1:
-                        queue.append((nx, ny))
-                    
-                if i == 2 and board[nx][ny] == 1:
-                    count+=1
-                else:
-                    break                
+    for i in board:    
+        if answer < max(i):
+            answer = max(i)
+        
+    return answer * answer
 
-        return count
-    
-    print(bfs(0,1))
-    
-    return answer
+print(solution([[1,1,1,1]])) # 1
 
 print(solution([[0,1,1,1],
                 [1,1,1,1],

@@ -16,12 +16,27 @@ F(5) = F(3) + F(4) = 2 + 3 = 5
 제한 사항 : 
     n은 2 이상 100,000 이하인 자연수입니다.
 """
+import time
 
-def solution(n):    
+def fib(n):
+    start = time.time() 
+    
     n_0, n_1 = 0, 1
     for _ in range(n):
         n_0, n_1 = n_1, n_0 + n_1    
-    return n_0 % 1234567
+        
+    return round(time.time() - start, 4)
 
-print(solution(3))
-print(solution(5))
+def fib1(n):
+    start = time.time() 
+    d = [0]*50000
+    
+    if n==1 or n==2:
+        return 1
+    if d[n] != 0:
+        return d[n]
+    
+    d[n] = fib1(n-1) + fib(n-2)
+    return round(time.time() - start, 4)
+
+print(fib1(49999))
