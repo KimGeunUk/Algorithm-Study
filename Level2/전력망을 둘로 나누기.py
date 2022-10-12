@@ -17,43 +17,29 @@ wires의 각 원소는 [v1, v2] 2개의 자연수로 이루어져 있으며, 이
 """
 
 def solution(n, wires):
-    answer = -1
-    all_ = []
-    a = []
-    r = [[0, []] for _ in range(n+1)]
-    
-    max_ = -float('inf')
-    
-    index = 0    
-    
-    for wire in wires:
-        r[wire[0]][0] += 1
-        r[wire[0]][1].append(wire[1])
+    answer = []
+    r = [[] for _ in range(n+1)]
 
-        r[wire[1]][0] += 1
-        r[wire[1]][1].append(wire[0])
+    for wire in wires:
+        r[wire[0]].append(wire[1])
+        r[wire[1]].append(wire[0])
         
-        if wire[0] not in all_:
-            all_.append(wire[0])
-        if wire[1] not in all_:
-            all_.append(wire[1])
-    
     for k in range(1, n+1):
         min_ = float('inf')
-        for idx, i in enumerate(r[k][1]):        
-            start = r[k][1][:idx] + r[k][1][idx+1:]            
+        for idx, i in enumerate(r[k]):        
+            start = r[k][:idx] + r[k][idx+1:]            
             stack = [k]
             
             while start:
                 i = start.pop()            
                 if i not in stack:
                     stack.append(i)
-                    start += r[i][1]
-            if len(stack) < min_:
-                min_ = len(stack)
-        a.append(min_)
+                    start += r[i]
+                    
+            min_ = min(len(stack), min_)
+        answer.append(min_)
 
-    return abs(max(a)-(n-max(a)))
+    return abs(max(answer)-(n-max(answer)))
 
 print(solution(9, [[1,3],[2,3],[3,4],[4,5],[4,6],[4,7],[7,8],[7,9]])) # 3
 # print(solution(4, [[1,2],[2,3],[3,4]])) # 0

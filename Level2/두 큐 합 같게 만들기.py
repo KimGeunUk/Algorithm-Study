@@ -60,11 +60,11 @@ def solution(queue1, queue2):
             if len(q2) == 0:
                 return -1
         
-        if answer > len(q1) + len(q2):
+        if answer > (len(q1) + len(q2))*2:
             return -1
+        
         answer += 1
-               
-    
+                   
     return answer
 
 print(solution([3, 2, 7, 2], [4, 6, 5, 1])) # 2
