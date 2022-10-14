@@ -28,8 +28,7 @@ def solution(n, m):
 
 # --------------------------------- 다른 풀이
 
-def gcd(a,b):
-    
+def gcd(a,b):    
     if (a<b):
         a, b = b, a
     while (b != 0 ):
@@ -39,6 +38,15 @@ def gcd(a,b):
 def solution2(n,m):
     return [gcd(n,m), n*m/gcd(n,m)]
 
+# --------------------------------- 다른 풀이
 
-print(solution2(3, 12))
-print(solution2(2, 5))
+def solution3(a, b):
+    a_, b_ = max(a, b), min(a, b)
+    while b_ != 0:
+        a_, b_ = b_, a_ % b_
+    answer = [a_, int(a*b/a_)]
+
+    return answer
+
+print(solution3(3, 12))
+print(solution3(2, 5))
