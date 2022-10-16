@@ -23,7 +23,8 @@ def solution(n):
             answer.append([start, end])
             return
         
-        hanoi(n-1, start, via, end)        
+        hanoi(n-1, start, via, end)
+        
         answer.append([start, end])
         
         hanoi(n-1, via, end, start)

@@ -25,7 +25,6 @@ h는 명함의 세로 길이를 나타냅니다.
 w와 h는 1 이상 1,000 이하인 자연수입니다.
 """
 def solution(sizes):
-    answer = 0
     max_0 = -float('inf')
     max_1 = -float('inf')
     for size in sizes:
@@ -35,8 +34,7 @@ def solution(sizes):
             max_0 = size[0]
         if size[1] > max_1:
             max_1 = size[1]
-    print(max_0, max_1)
-    return answer
+    return max_0*max_1
 
 print(solution([[60, 50], [30, 70], [60, 30], [80, 40]]))
 print(solution([[10, 7], [12, 3], [8, 15], [14, 7], [5, 15]]))

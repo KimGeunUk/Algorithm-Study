@@ -16,8 +16,7 @@
 def solution(price, money, count):
     answer = price
     for i in range(2, count+1):
-        answer += price * i 
-
-    return 0 if answer-money >= 0 else answer-money
+        answer += price * i
+    return answer-money if answer-money >= 0 else 0
 
 print(solution(3, 20, 4)) # 10
