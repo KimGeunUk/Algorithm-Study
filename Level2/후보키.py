@@ -69,8 +69,15 @@ def solution(relation):
     
     return answer
 
-# 다른 사람 풀이
+# 다른 사람 풀이 - intersection 블로그 정리할 것
 from itertools import combinations
+A = set(['H', 1, 'l', 2, 'o'])
+A.add('w')
+print(A)
+A.remove('H')
+print(A)
+A.update([0, 4])
+print(A)
 def solution1(relation):
     n_row=len(relation)
     n_col=len(relation[0])  #->runtime error 우려되는 부분
@@ -84,7 +91,7 @@ def solution1(relation):
         tmp=[tuple([item[key] for key in keys]) for item in relation]
         if len(set(tmp))==n_row:
             final.append(keys)
-    print(final)
+            
     answer=set(final[:])
     for i in range(len(final)):
         for j in range(i+1,len(final)):
