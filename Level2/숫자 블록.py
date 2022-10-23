@@ -19,12 +19,40 @@
 begin, end 는 1 이상 1,000,000,000이하의 자연수 이고, begin는 항상 end보다 작습니다.
 end - begin 의 값은 항상 10,000을 넘지 않습니다.
 """
-
-def solution(begin, end):
+def solution1(begin, end):
     answer = []
     
-    stack = [0] * end
+    stack = [0] * (10000)
     
-    return answer
+    row = end // 2
+    
+    for r in range(1, row+1):
+        for c in range(r*2, end+1, r):
+            if c == 1:
+                stack[c-1] = 0
+            stack[c-1] = r
+
+    return stack[begin-1:end]
+
+def divisor(n):
+    if n == 1:
+        return 0
+    
+    for i in range(2, int(n**(1/2))+1):
+        if n % i == 0:
+            if n // i <= 10**7:
+                return n // i
+    return 1
+
+def solution(begin, end):    
+    stack = []
+    
+    for idx, c in enumerate(range(begin, end+1)):           
+        stack.append(divisor(c))
+
+    return stack
 
 print(solution(1, 10)) # [0, 1, 1, 2, 1, 3, 1, 4, 3, 5]
+print(solution(11, 20)) # [6, 1, 7, 5, 8, 1, 9, 1, 10]
+print(solution(4, 9)) # [2, 1, 3, 1, 4, 3]
+print(solution1(21, 30)) # [7, 11, 1, 12, 5, 13, 9, 14, 1, 15]

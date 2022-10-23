@@ -11,45 +11,44 @@
 n은 12이하의 자연수 입니다.
 """
 # 모든 상황을 검색 할 수는 없다..
-# def solution(n):
-#     answer = []
+def solution(n):
+    answer = []
     
-#     def DFS(y, x):
-#         check = [[y, x]]
-#         maps[y][x] = 1
-#         for r in range(n):
-#             for c in range(n):
-#                 nx, ny = c, r
-#                 if ny == y or nx == x or abs(ny - y) == abs(nx - x):
-#                     continue
-#                 if ny >= n or nx >= n:
-#                     continue # check
+    def DFS(y, x):
+        check = [[y, x]]
+        maps[y][x] = 1
+        for r in range(n):
+            for c in range(n):
+                nx, ny = c, r
+                if ny == y or nx == x or abs(ny - y) == abs(nx - x):
+                    continue
+                if ny >= n or nx >= n:
+                    continue # check
                 
-#                 isin = False
-#                 for c in check:
-#                     if c[0] == ny or c[1] == nx or abs(c[0] - ny) == abs(c[1] - nx):
-#                         isin = True
-#                         continue
-#                     else:                        
-#                         isin = False
+                isin = False
+                for c in check:
+                    if c[0] == ny or c[1] == nx or abs(c[0] - ny) == abs(c[1] - nx):
+                        isin = True
+                        continue
+                    else:                        
+                        isin = False
                 
-#                 if isin == False:
-#                     maps[ny][nx] = 1
-#                     check.append([ny, nx])          
+                if isin == False:
+                    maps[ny][nx] = 1
+                    check.append([ny, nx])          
 
-#         return check 
-#     map_list = list()
-#     for r in range(n):
-#         for c in range(n):
-#             maps = [[0 for _ in range(n)] for _ in range(n)]
-#             ch = DFS(r, c)
+        return check 
+    map_list = list()
+    for r in range(n):
+        for c in range(n):
+            maps = [[0 for _ in range(n)] for _ in range(n)]
+            ch = DFS(r, c)
             
-#             if len(ch) == n and ch not in answer and maps not in map_list:
-#                 map_list.append(maps)
-#                 answer.append(ch)    
-#     return len(map_list)
-import time
-print(time.time())
+            if len(ch) == n and ch not in answer and maps not in map_list:
+                map_list.append(maps)
+                answer.append(ch)    
+    return len(map_list)
+
 def dfs(queen, n, row):
     count = 0
     
@@ -74,8 +73,7 @@ def dfs(queen, n, row):
     return count
 
 def solution(n):
-    queen = [0]*n
-        
+    queen = [0]*n        
     return dfs(queen, n, 0)
 
 print(solution(8)) # 2

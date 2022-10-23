@@ -29,4 +29,6 @@ graph = [
 
 visited = [False] * 9
 
-BFS(graph, 1, visited)
+#BFS(graph, 1, visited)
+a = [1, 2, 3]
+print(a[::-1])
