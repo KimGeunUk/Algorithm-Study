@@ -19,13 +19,9 @@
 begin, end 는 1 이상 1,000,000,000이하의 자연수 이고, begin는 항상 end보다 작습니다.
 end - begin 의 값은 항상 10,000을 넘지 않습니다.
 """
-def solution1(begin, end):
-    answer = []
-    
-    stack = [0] * (10000)
-    
-    row = end // 2
-    
+def solution1(begin, end):    
+    stack = [0] * (end)    
+    row = end // 2    
     for r in range(1, row+1):
         for c in range(r*2, end+1, r):
             if c == 1:
