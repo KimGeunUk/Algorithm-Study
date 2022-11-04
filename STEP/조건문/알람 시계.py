@@ -31,6 +31,6 @@ if b < 0:
     a -= 1
     if a < 0:
         a = 23
-    b = 60 - abs(b)
+    b = 60 + b    
 
 print(a, b)
