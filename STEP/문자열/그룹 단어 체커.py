@@ -12,4 +12,5 @@ for _ in range(N):
                 break
     else:
         answer += 1
+        
 print(answer)
