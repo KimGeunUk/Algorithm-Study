@@ -23,5 +23,3 @@ for _ in range(T):
                 answer = str(i) + ' ' + str(N-i)
                 diff = abs(N-i-i)
     print(answer)
-                
-    
