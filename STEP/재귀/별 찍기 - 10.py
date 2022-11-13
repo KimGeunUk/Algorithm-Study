@@ -1,4 +1,3 @@
-
 def star_(n):
     if n == 1:
         return ['*']
