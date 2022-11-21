@@ -23,17 +23,5 @@ stand = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 dfs(maps, 0)
 
-print()
 for m in maps:
     print(*m)
-            
-# # while True:
-# #     if (sum(maps, [])).count(0) != 0:
-# #         dfs(maps, 0, 0)
-
-# #         for m in maps:
-# #             print(*m)
-# #     else:
-# #         for m in maps:
-# #             print(*m)
-# #         break
