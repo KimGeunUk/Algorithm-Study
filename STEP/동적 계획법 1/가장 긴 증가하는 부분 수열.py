@@ -4,7 +4,6 @@ nums = list(map(int, input().split())) # 10 30 20 30 40 50
 DP = [0] * N
 
 for i in range(N):
-    D = list()
     for j in range(i):
         if nums[i] > nums[j] and DP[i] < DP[j]:
             DP[i] = DP[j]
