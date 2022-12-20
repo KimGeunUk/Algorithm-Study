@@ -15,7 +15,7 @@ while True:
     
     if info_ == 0:
         packet.popleft()
-    elif info_ != 0 and len(packet) < N:
+    elif len(packet) < N:
         packet.append(info_)
 
 if packet:
