@@ -74,6 +74,3 @@ def Check(scene, n):
         print(")", end="")
 
 Check(SCENE, N)
-
-##
-##
