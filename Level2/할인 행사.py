@@ -1,7 +1,10 @@
 from copy import deepcopy
-
+from dis import disco
 def solution(want, number, discount):
-    answer = 1
+    answer = 0
+    
+    if len(discount) < 15:
+        discount = discount + discount[:15-len(discount)]
     
     B = dict()
     for w, n in zip(want, number):
@@ -15,14 +18,26 @@ def solution(want, number, discount):
                 continue
             B[d] -= 1
         
-        if sum(B.values()) != 0:
-            B = deepcopy(T)
+        if sum(B.values()) == 0:
             answer += 1
-        else:
-            break 
-    else:
-        answer = 0       
+            
+        B = deepcopy(T)
     
+    return answer
+
+from collections import Counter as C
+def solution1(want, number, discount):
+    answer = 0
+    
+    B = dict()
+    for w, n in zip(want, number):
+        B[w] = n
+        
+    for i in range(len(discount)-9):
+        c = C(discount[i:i+10])
+        if c == B:
+            answer += 1
+            
     return answer
 
 print(solution(["banana", "apple", "rice", "pork", "pot"],
