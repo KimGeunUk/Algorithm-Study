@@ -23,25 +23,55 @@ cache hit일 경우 실행시간은 1이다.
 cache miss일 경우 실행시간은 5이다.
 """
 
+# def solution(cacheSize, cities):
+#     answer = 0
+    
+#     cities = [i.lower() for i in cities]
+    
+#     if cacheSize == 0:
+#         return len(cities) * 5
+    
+#     L = ['' for i in range(cacheSize)]
+    
+#     for i in cities:
+#         if i in L:
+#             L.remove(i)
+#             L.append(i)
+#             answer += 1
+#         else:
+#             L.remove(L[0])
+#             L.append(i)
+#             answer += 5  
+    
+#     return answer
+
+# print(solution(3, ["Jeju", "Pangyo", "Seoul", "NewYork", "LA", "Jeju", "Pangyo", "Seoul", "NewYork", "LA"])) # 50
+# print(solution(3, ["Jeju", "Pangyo", "Seoul", "Jeju", "Pangyo", "Seoul", "Jeju", "Pangyo", "Seoul"])) # 21
+# print(solution(2, ["Jeju", "Pangyo", "Seoul", "NewYork", "LA", "SanFrancisco", "Seoul", "Rome", "Paris", "Jeju", "NewYork", "Rome"])) # 60
+# print(solution(5, ["Jeju", "Pangyo", "Seoul", "NewYork", "LA", "SanFrancisco", "Seoul", "Rome", "Paris", "Jeju", "NewYork", "Rome"])) # 52
+# print(solution(2, ["Jeju", "Pangyo", "NewYork", "newyork"])) # 16
+# print(solution(0, ["Jeju", "Pangyo", "Seoul", "NewYork", "LA"])) # 25
+
+
 def solution(cacheSize, cities):
-    answer = 0
+    answer = 0   
+    cachelist = []
+    cache_hit = 1
+    cache_miss = 5
     
-    cities = [i.lower() for i in cities]
+    # 조건 - 대소문자 구문 X & 최대 20자
+    cities = [city[:20].lower() for city in cities]
     
-    if cacheSize == 0:
-        return len(cities) * 5
-    
-    L = ['' for i in range(cacheSize)]
-    
-    for i in cities:
-        if i in L:
-            L.remove(i)
-            L.append(i)
-            answer += 1
+    for city in cities:
+        if city not in cachelist:
+            cachelist.append(city)
+            if len(cachelist) > cacheSize:
+                cachelist.remove(cachelist[0])
+            answer += cache_miss
         else:
-            L.remove(L[0])
-            L.append(i)
-            answer += 5  
+            cachelist.remove(city)
+            cachelist.append(city)
+            answer += cache_hit
     
     return answer
 
