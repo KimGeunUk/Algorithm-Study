@@ -20,6 +20,37 @@ P처럼 소수 양쪽에 아무것도 없는 경우
     1 ≤ n ≤ 1,000,000   
     3 ≤ k ≤ 10
 """
+# import math
+# def is_prime(n):
+#     for i in range(2, int(math.sqrt(n)+1)):
+#         if n % i == 0:
+#             return False
+#     return True
+
+# def convert(n, k):
+#     c = ''
+#     while n:
+#         c = str(n%k) + c
+#         n //= k
+#     return c
+
+# def solution(n, k):
+#     answer = 0
+    
+#     c = convert(n, k)
+#     c = str(c).split('0')
+    
+#     for i in c:
+#         if i == '' or i == '1':
+#             pass
+#         elif is_prime(int(i)):
+#             answer += 1
+    
+#     return answer
+
+# print(solution(437674, 3)) # 3
+# print(solution(110011, 10)) # 2
+
 import math
 def is_prime(n):
     for i in range(2, int(math.sqrt(n)+1)):
@@ -27,24 +58,23 @@ def is_prime(n):
             return False
     return True
 
-def convert(n, k):
-    c = ''
-    while n:
-        c = str(n%k) + c
-        n //= k
-    return c
-
 def solution(n, k):
     answer = 0
     
-    c = convert(n, k)
-    c = str(c).split('0')
+    # 진수 변환
+    k_ = ''    
+    while n != 0:
+        n, m = divmod(n, k)
+        k_ += str(m)
     
-    for i in c:
-        if i == '' or i == '1':
+    k = k_[::-1]
+    s = k.split('0')
+
+    for s_ in s:
+        if s_ == '' or s_ == '1':
             pass
-        elif is_prime(int(i)):
-            answer += 1
+        elif is_prime(int(s_)):
+            answer += 1        
     
     return answer
 
