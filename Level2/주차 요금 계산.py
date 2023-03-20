@@ -63,41 +63,73 @@
             주차장에 없는 차량이 출차되는 경우
             주차장에 이미 있는 차량(차량번호가 같은 차량)이 다시 입차되는 경우
 """
+# import math
+# def solution(fees, records):
+#     answer = []
+    
+#     records_dic = dict()
+#     for i in records:
+#         t, n, s = i[0:5], i[6:10], i[11:]
+#         if n not in records_dic.keys():
+#             records_dic[n] = [[int(t[:2])*60+int(t[-2:]), s]]
+#         else:
+#             records_dic[n].append([int(t[:2])*60+int(t[-2:]), s])
+    
+#     records_dic = dict(sorted(records_dic.items()))
+    
+#     for k, v in records_dic.items():
+#         sum_r = 0
+#         sum_l = 0
+#         for idx, v_ in enumerate(v):            
+#             if v_[1] == 'IN':
+#                 sum_r += v_[0]
+#                 if idx == len(v)-1:
+#                     sum_r -= 1439
+#                     sum_l+=abs(sum_r)
+#             elif v_[1] == 'OUT':
+#                 sum_r -= v_[0]
+#                 sum_l+=abs(sum_r)
+#                 sum_r = 0  
+        
+#         if sum_l <= fees[0]:
+#             answer.append(fees[1])
+#         else:
+#             answer.append(fees[1] + math.ceil((sum_l-fees[0])/fees[2])*fees[3])
+                
+#     return answer
+
+from collections import defaultdict
+from collections import deque
 import math
 def solution(fees, records):
     answer = []
     
-    records_dic = dict()
-    for i in records:
-        t, n, s = i[0:5], i[6:10], i[11:]
-        if n not in records_dic.keys():
-            records_dic[n] = [[int(t[:2])*60+int(t[-2:]), s]]
-        else:
-            records_dic[n].append([int(t[:2])*60+int(t[-2:]), s])
+    rd = defaultdict(list) # records dict
+    for record in records:
+        t, n, s = record.split(' ')        
+        rd[n].append([(int(t[:2])*60 + int(t[3:])), s])
     
-    records_dic = dict(sorted(records_dic.items()))
-    
-    for k, v in records_dic.items():
-        sum_r = 0
-        sum_l = 0
-        for idx, v_ in enumerate(v):            
+    rd = dict(sorted(rd.items()))
+
+    for k, v in rd.items():
+        inout = deque()
+        value = 0
+        for v_ in v:
             if v_[1] == 'IN':
-                sum_r += v_[0]
-                if idx == len(v)-1:
-                    sum_r -= 1439
-                    sum_l+=abs(sum_r)
-            elif v_[1] == 'OUT':
-                sum_r -= v_[0]
-                sum_l+=abs(sum_r)
-                sum_r = 0  
+                inout.append(v_[0])
+            else:
+                value += v_[0] - inout.popleft()        
+        else:
+            if inout:
+                value += 1439 - inout.popleft()
         
-        if sum_l <= fees[0]:
+        if value <= fees[0]:
             answer.append(fees[1])
         else:
-            answer.append(fees[1] + math.ceil((sum_l-fees[0])/fees[2])*fees[3])
-                
+            answer.append(fees[1] + math.ceil((value-fees[0])/fees[2])*fees[3])
+            
     return answer
 
 print(solution([180, 5000, 10, 600], ["05:34 5961 IN", "06:00 0000 IN", "06:34 0000 OUT", "07:59 5961 OUT", "07:59 0148 IN", "18:59 0000 IN", "19:09 0148 OUT", "22:59 5961 IN", "23:00 5961 OUT"]))
-print(solution([120, 0, 60, 591], ["16:00 3961 IN","16:00 0202 IN","18:00 3961 OUT","18:00 0202 OUT","23:58 3961 IN"]))
-print(solution([1, 461, 1, 10], ["00:00 1234 IN"]))
+# print(solution([120, 0, 60, 591], ["16:00 3961 IN","16:00 0202 IN","18:00 3961 OUT","18:00 0202 OUT","23:58 3961 IN"]))
+# print(solution([1, 461, 1, 10], ["00:00 1234 IN"]))

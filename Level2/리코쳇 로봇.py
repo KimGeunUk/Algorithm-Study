@@ -64,8 +64,6 @@ def solution(board):
                 if visited[nx][ny] != 1:
                     visited[nx][ny] = 1
                     mv.append((nx, ny, count + 1))
-                    
-            answer += 1
 
         return -1
 
