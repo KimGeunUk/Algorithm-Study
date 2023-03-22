@@ -56,6 +56,32 @@ def solution(orders, course):
 
     return [ ''.join(v) for v in sorted(result) ]
 
+
+from collections import defaultdict
+from itertools import combinations as C
+def solution(orders, course):
+    answer = []
+    
+    for co in course:
+        count_dict = defaultdict(int)
+        for order in orders:
+            order = sorted(order)
+            for o in list(C(order, co)):
+                count_dict[o] += 1
+                
+        ordered = dict(sorted(count_dict.items(), key=lambda x:x[1], reverse=True))
+        
+        ordered_reverse = defaultdict(list)
+        for k, v in ordered.items():
+            if v >= 2:
+                ordered_reverse[v].append(k)
+
+        if len(ordered) != 0:
+            for o in ordered_reverse[max(ordered.values())]:
+                answer.append(o)
+    
+    return [''.join(v) for v in sorted(answer)]
+
 print(solution(["ABCFG", "AC", "CDE", "ACDE", "BCFG", "ACDEH"], [2,3,4]))       # ["AC", "ACDE", "BCFG", "CDE"]
 print(solution(["ABCDE", "AB", "CD", "ADE", "XYZ", "XYZ", "ACD"], [2,3,5]))     # ["ACD", "AD", "ADE", "CD", "XYZ"]
 print(solution(["XYZ", "XWY", "WXA"], [2,3,4]))       # ["WX", "XY"]
