@@ -64,6 +64,15 @@ def solution(files):
     
     return answer
 
-#print(solution(["img12.png", "img10.png", "img02.png", "img1.png", "IMG01.GIF", "img2.JPG"]))
-#print(solution(["F-5 Freedom Fighter", "B-50 Superfortress", "A-10 Thunderbolt II", "F-14 Tomcat"]))
+import re
+def solution(files):
+    answer = []
+    an = []
+
+    for file in files:
+        s = []
+        print(re.findall(r'\d+', file))
+
+print(solution(["img12.png", "img10.png", "img02.png", "img1.png", "IMG01.GIF", "img2.JPG"]))
+print(solution(["F-5 Freedom Fighter", "B-50 Superfortress", "A-10 Thunderbolt II", "F-14 Tomcat"]))
 print(solution(["MUZI012.txt", "muzi9.txt", "muzi0011.TXT", "muzi13.txt", "MUZI10.txt", "MUZI014.txt"]))
