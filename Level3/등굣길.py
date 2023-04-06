@@ -45,7 +45,6 @@ def solution(m, n, puddles):
             if [i, j] not in puddles:
                 dp[i][j] = dp[i-1][j] + dp[i][j-1]
 
-    print(dp)
     return dp[-1][-1] % 1000000007
 
 print(solution(4, 3, [[2, 2]])) # 4
