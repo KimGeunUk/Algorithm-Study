@@ -40,8 +40,8 @@ def solution(id_list, report, k):
             
     return answer
 
-print(solution(["muzi", "frodo", "apeach", "neo"], ["muzi frodo","apeach frodo","frodo neo","muzi neo","apeach muzi"], 2))
-print(solution(["con", "ryan"], ["ryan con", "ryan con", "ryan con", "ryan con"], 3))
+# print(solution(["muzi", "frodo", "apeach", "neo"], ["muzi frodo","apeach frodo","frodo neo","muzi neo","apeach muzi"], 2))
+# print(solution(["con", "ryan"], ["ryan con", "ryan con", "ryan con", "ryan con"], 3))
 
 # Other Solution
 def solution(id_list, report, k):
@@ -56,3 +56,31 @@ def solution(id_list, report, k):
             answer[id_list.index(r.split()[0])] += 1
 
     return answer
+
+# print(solution(["muzi", "frodo", "apeach", "neo"], ["muzi frodo","apeach frodo","frodo neo","muzi neo","apeach muzi"], 2))
+# print(solution(["con", "ryan"], ["ryan con", "ryan con", "ryan con", "ryan con"], 3))
+
+# 2023
+from collections import defaultdict
+
+def solution(id_list, report, k):
+    answer = [0] * len(id_list)
+    
+    d1 = defaultdict(list)
+    d2 = defaultdict(int)
+    
+    report = list(set(report)) # 중복 제거
+    for r in report:
+        a, b = r.split(' ')
+        d1[a].append(b)
+        d2[b] += 1
+    
+    for idx, id in enumerate(id_list):
+        for id_ in d1[id]:
+            if d2[id_] >= k:
+                answer[idx] += 1
+
+    return answer
+
+print(solution(["muzi", "frodo", "apeach", "neo"], ["muzi frodo","apeach frodo","frodo neo","muzi neo","apeach muzi"], 2))
+print(solution(["con", "ryan"], ["ryan con", "ryan con", "ryan con", "ryan con"], 3))
