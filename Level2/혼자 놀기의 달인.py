@@ -1,21 +1,25 @@
 def solution(cards):
-    answer = 0
     group = []
+    visited = [False for _ in range(len(cards)+1)]
     
-    index = [i for i in range(len(cards))]
-    visited = [0 for _ in range(len(cards))]
-    print(index[:3]+index[3+1:])
-    
-    g = []
-    idx = 0
-    while True:
-        if visited[idx] == 1:
-            break
-        g.append(cards[idx])        
-        idx = cards[idx] - 1
-        visited[idx] = 1
-    group.append(g)
+    for num in cards:
+        if not visited[num]:
+            temp = []
+            while True:
+                if num in temp:
+                    break
+                temp.append(num)                
+                visited[num] = True
+                num = cards[num-1]
+            
+            group.append(len(temp))
+            
+    group = sorted(group, reverse=True)    
 
-    return answer
+    if len(group) < 2:
+        return 0
+    else: 
+        return group[0] * group[1]
 
 print(solution([8,6,3,7,2,5,1,4])) # 12
+print(solution([1, 1])) # 12
