@@ -6,15 +6,21 @@ def solution(n, k, enemy):
     heap = []
     
     for idx, e in enumerate(enemy):
-        if len(heap) < k:
-            heappush(heap, e)
-        else:
-            if n > 0:
-                n -= heappop(heap)
+        heappush(heap, e)
         
-        
-
+        if len(heap) > k:
+            n -= heappop(heap)
+            if n < 0:
+                answer = idx
+                break
+            elif n == 0:
+                answer = idx + 1
+                break
+    else:
+        answer = idx + 1
+            
     return answer
+
 
 print(solution(7, 3, [4, 2, 4, 5, 3, 3, 1]))
 print(solution(2, 4, [3, 3, 3, 3]))
