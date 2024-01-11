@@ -1,0 +1,77 @@
+""" 
+문제 설명
+
+무인도에 갇힌 사람들을 구명보트를 이용하여 구출하려고 합니다. 구명보트는 작아서 한 번에 최대 2명씩 밖에 탈 수 없고, 무게 제한도 있습니다.
+
+예를 들어, 사람들의 몸무게가 [70kg, 50kg, 80kg, 50kg]이고 구명보트의 무게 제한이 100kg이라면 2번째 사람과 4번째 사람은 같이 탈 수 있지만
+1번째 사람과 3번째 사람의 무게의 합은 150kg이므로 구명보트의 무게 제한을 초과하여 같이 탈 수 없습니다.
+
+구명보트를 최대한 적게 사용하여 모든 사람을 구출하려고 합니다.
+
+사람들의 몸무게를 담은 배열 people과 구명보트의 무게 제한 limit가 매개변수로 주어질 때,
+모든 사람을 구출하기 위해 필요한 구명보트 개수의 최솟값을 return 하도록 solution 함수를 작성해주세요.
+
+제한사항 :
+    무인도에 갇힌 사람은 1명 이상 50,000명 이하입니다.
+    각 사람의 몸무게는 40kg 이상 240kg 이하입니다.
+    구명보트의 무게 제한은 40kg 이상 240kg 이하입니다.
+    구명보트의 무게 제한은 항상 사람들의 몸무게 중 최댓값보다 크게 주어지므로 사람들을 구출할 수 없는 경우는 없습니다.
+"""
+
+## 시간 초과
+# def solution(people, limit):
+#     people = sorted(people, reverse=True)
+    
+#     l = list()    
+#     l.append([people[0]])
+
+#     for i in people[1:]:
+#         j = 0
+#         while True:
+#             if sum(l[j]) < limit:
+#                 s = i + sum(l[j])                
+#                 if s <= limit and len(l[j]) < 2:
+#                     l[j].append(i)
+#                     break
+#                 elif j == len(l)-1:
+#                     l.append([i])
+#                     break
+#             elif j == len(l)-1:
+#                 l.append([i])
+#                 break
+
+#             j += 1            
+#             if j == len(l):
+#                 break
+            
+#     return len(l)
+
+from collections import deque
+def solution(people, limit):
+    people = deque(sorted(people))
+    answer = list()
+    
+    while True:
+        if len(people) >= 2:
+            r = people.pop()
+            l = people.popleft()
+            if r + l <= limit:            
+                answer.append([r, l])
+            else:
+                answer.append([r])
+                people.appendleft(l)
+        else:
+            r = people.pop()
+            answer.append([r])
+        
+        if len(people) == 0:
+            break
+        
+    return len(answer)
+
+print(solution([70, 50, 80, 50], 100)) # 3
+print(solution([70, 80, 50], 100)) # 3
+print(solution([40,50,150,160], 200)) # 2
+print(solution([100,500,500,900,950], 1000)) # 3
+print(solution([30, 40, 50, 60], 100))
+print(solution([40, 40, 40], 120))
