@@ -1,4 +1,4 @@
-from collections import Counter
+from itertools import product
 
 def ismatch(a, b):
     if len(a) != len(b):
@@ -15,35 +15,58 @@ def ismatch(a, b):
         return True
 
 def solution(user_id, banned_id):
-    answer = 1
-    
-    c = Counter(banned_id)
-    for k, v in c.items():
-        if v > 1:
-            for ui in user_id:
-                if ismatch(k, ui):
-                    for _ in range(v-1):
-                        user_id.remove(ui)
-                    for _ in range(v-1):
-                        banned_id.remove(k)
-                    break
-                
-    
-    b = [[] for _ in range(len(banned_id))]
-    count = 0
-    for idx, bi in enumerate(banned_id):
-        for ui in user_id:
-            if ismatch(bi, ui):
-                if idx > 0:
-                    for _b in b[:idx]:
-                        if ui in _b:
-                            count += 1
-                b[idx].append(ui)
+    answer = set()
 
-    for _b in b:
-        answer *= len(_b)
+    result = [[] for _ in range(len(banned_id))]
+    
+    for i in range(len(banned_id)):
+        for u in user_id:
+            if ismatch(banned_id[i], u):
+                result[i].append(u)
+
+    print(result)
+    
+    result = list(map(set, product(*result)))
+    
+    for r in result:
+        if len(r) == len(banned_id):
+            answer.add(tuple(sorted(r)))
+
+    return len(answer)
+
+
+def solution(user_id, banned_id):
+    answer = set()
         
-    return answer - count
+    def bfs(b_idx, visited, user_id_list):
+        nonlocal answer
+        
+        if b_idx == len(banned_id):
+            answer.add(tuple(sorted(user_id_list)))
+            return
+        
+        for u_idx in range(len(user_id)):                         
+            if visited[u_idx] == False:
+                if ismatch(user_id[u_idx], banned_id[b_idx]):
+                    
+                    visited[u_idx] = True                    
+                    user_id_list.append(user_id[u_idx])
+
+                    bfs(b_idx+1, visited, user_id_list)
+                    
+                    if b_idx == 0:
+                        user_id_list = []
+                    else:
+                        user_id_list = user_id_list[:b_idx]
+                    visited[u_idx] = False
+                    
+    
+    visited = [False for _ in range(len(user_id))]
+    
+    bfs(0, visited, [])
+    
+    return len(answer)
+
 
 print(solution(["frodo", "fradi", "crodo", "abc123", "frodoc"], ["fr*d*", "abc1**"])) # 2
 print(solution(["frodo", "fradi", "crodo", "abc123", "frodoc"], ["*rodo", "*rodo", "******"])) # 2
