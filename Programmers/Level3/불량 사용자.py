@@ -24,8 +24,6 @@ def solution(user_id, banned_id):
             if ismatch(banned_id[i], u):
                 result[i].append(u)
 
-    print(result)
-    
     result = list(map(set, product(*result)))
     
     for r in result:
@@ -54,11 +52,8 @@ def solution(user_id, banned_id):
 
                     bfs(b_idx+1, visited, user_id_list)
                     
-                    if b_idx == 0:
-                        user_id_list = []
-                    else:
-                        user_id_list = user_id_list[:b_idx]
                     visited[u_idx] = False
+                    user_id_list = user_id_list[:b_idx]
                     
     
     visited = [False for _ in range(len(user_id))]
