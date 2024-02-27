@@ -18,4 +18,5 @@ while True:
     else:
         print(f"{n} is NOT perfect.")
         
+        
     
