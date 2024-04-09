@@ -5,6 +5,7 @@ for i in range(1, T + 1):
     
     previous = [1]
     
+    print(f'#{i}')
     print('1')
     
     for j in range(2, N + 1):

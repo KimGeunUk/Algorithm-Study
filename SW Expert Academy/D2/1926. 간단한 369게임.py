@@ -10,4 +10,3 @@ for i in range(1, N + 1):
     if count > 0:
         print('-' * count, end=' ')
     else: print(i, end=' ')
-    
