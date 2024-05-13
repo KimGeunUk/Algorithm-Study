@@ -1,1 +1,5 @@
-print('test')
+T = int(input())
+
+for t in range(T):
+    print(t)
+
