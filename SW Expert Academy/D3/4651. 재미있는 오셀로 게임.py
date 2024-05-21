@@ -15,7 +15,7 @@ for t in range(T):
         maps[r][c] = stone
         
         # 왼
-        for i in range(2, c+1):
+        for i in range(1, c+1):
             if maps[r][c-i] == stone:
                 for j in range(1, i):
                     maps[r][c-j] = stone
@@ -23,7 +23,7 @@ for t in range(T):
             elif maps[r][c-i] == 0: break
         
         # 오
-        for i in range(2, N-c):
+        for i in range(1, N-c):
             if maps[r][c+i] == stone:
                 for j in range(1, i):
                     maps[r][c+j] = stone
@@ -31,7 +31,7 @@ for t in range(T):
             elif maps[r][c+i] == 0: break
             
         # 상
-        for i in range(2, r+1):
+        for i in range(1, r+1):
             if maps[r-i][c] == stone:
                 for j in range(1, i):
                     maps[r-j][c] = stone
@@ -39,7 +39,7 @@ for t in range(T):
             elif maps[r-i][c] == 0: break
         
         # 하
-        for i in range(2, N-r):
+        for i in range(1, N-r):
             if maps[r+i][c] == stone:
                 for j in range(1, i):
                     maps[r+j][c] = stone
@@ -47,7 +47,7 @@ for t in range(T):
             elif maps[r+i][c] == 0: break
         
         # 왼상
-        for i in range(1, min(r, c)+1):
+        for i in range(1, min(r+1, c+1)):
             if maps[r-i][c-i] == stone:
                 for j in range(1, i):
                     maps[r-j][c-j] = stone
@@ -78,9 +78,7 @@ for t in range(T):
                 break     
             elif maps[r+i][c+i] == 0: break
 
-    
-    black = 0
-    white = 0
+    black, white = 0, 0
     for ma in maps:
         for m in ma:
             if m == 1: black += 1
