@@ -8,3 +8,4 @@ while N:
     word += 1
 
 print(word - 1)
+        
