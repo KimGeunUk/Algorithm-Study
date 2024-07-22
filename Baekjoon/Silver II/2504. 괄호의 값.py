@@ -1,27 +1,43 @@
 import sys
 input = sys.stdin.readline
 
-op = input().strip()
+brakets = input().strip()
 
-arr = []
-temp = []
+stack = []
+temp = 1
+result = 0
+for i, braket in enumerate(brakets):
+    
+    if braket == "(":
+        temp *= 2
+        stack.append("(")
+    elif braket == "[":
+        temp *= 3
+        stack.append("[")
+        
+    elif braket == ")":
+        if not stack or stack[-1] == "[":
+            result = 0
+            break
+        
+        if brakets[i-1] == "(":
+            result += temp
+        
+        temp //= 2
+        stack.pop()
 
-for o in op:
-    if arr == [] or o == "(" or o == "[":
-        arr.append(o)
-    else:
-        p = arr.pop()
-        if p == "(":
-            if o == ")":
-                temp.append(2)
-            else:
-                arr.append(p)
-                arr.append(o)
-        elif p == "[":
-            if o == "]":
-                temp.append(3)
-            else:
-                arr.append(p)
-                arr.append(o)
+    elif braket == "]":
+        if not stack or stack[-1] == "(":
+            result = 0
+            break
+        
+        if brakets[i-1] == "[":
+            result += temp
+        
+        temp //= 3
+        stack.pop()
 
-    print(arr, temp)
+if stack:
+    result = 0
+
+print(result)
